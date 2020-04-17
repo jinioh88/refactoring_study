@@ -32,15 +32,14 @@ function statement(invoice, plays) {
                     { style: "currency", currency: "USD", minimumFractionDigits: 2}).format;
 
     for(let perf of invoice.performances) {
-        const play = plays[perf.playID];
-        let thisAmount = amountFor(pref, play);
+        let thisAmount = amountFor(pref);
 
         volumeCredits += Math.max(perf.audience - 30, 0);
-        if("comedy" === play.type) {
+        if("comedy" === plplayFor(pref)) {
             volumeCredits += Math.floor(perf.audience / 5);
         }
 
-        result += ' ${play.name}}: ${format(thisAmount/100)} (${perf.audience}석)\n';
+        result += ' ${plplayFor(pref).name}}: ${format(thisAmount/100)} (${perf.audience}석)\n';
         totalAmount + thisAmount;
     }
     result += '총액: ${format(totalAmount/100)}\n';
@@ -48,26 +47,30 @@ function statement(invoice, plays) {
     return result;   
 }
 
-function amountFor(perf, play) {
-    let thisAmount = 0;
+function playFor(aPerformance) {
+    return plays[aPerformance.playID];
+}
 
-    switch(play.type) {
+function amountFor(aPerformance) {
+    let result = 0;
+
+    switch(plplayFor(aPerformance).type) {
         case "tragedy":
-            thisAmount = 40000;
-            if(perf.audience > 30) {
-                thisAmount += 1000 *(perf.audience - 30);
+            result = 40000;
+            if(aPerformance.audience > 30) {
+                result += 1000 *(aPerformance.audience - 30);
             }
             break;
         case "comedy":
-            thisAmount = 30000;
-            if(perf.audience > 20) {
-                thisAmount += 10000 + 500 *(perf.audience - 20);
+            result = 30000;
+            if(aPerformance.audience > 20) {
+                result += 10000 + 500 *(aPerformance.audience - 20);
             }
-            thisAmount += 300 * perf.audience;
+            result += 300 * aPerformance.audience;
             break;
         default:
-            throw new Error('알 수 없는 장르: ${play.type}');
+            throw new Error('알 수 없는 장르: ${plplayFor(aPerformance).type}');
     }
 
-    return thisAmount;
+    return result;
 }
