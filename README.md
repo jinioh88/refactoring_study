@@ -26,7 +26,7 @@
                     thisAmount += 10000 + 500 *(perf.audience - 20);
                 }
                 thisAmount += 300 * perf.audience;
-                break;
+                break;W
             default:
                 throw new Error('알 수 없는 장르: ${play.type}');
         }
@@ -57,4 +57,5 @@
 - 리팩터링 후 항상 테스트하는 습관을 들이자. 조금씩 수정하여 매번 테스트하자. 
 - 임시변수는 나중에 문제를 일으킬 수 잇어 제거하는 것이 좋다. 
 
-5. 중간 점검: 난무하는 중첩 함수
+6. 계산 단계와 포맷팅 단계 분리하기
+- 
