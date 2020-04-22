@@ -370,3 +370,25 @@
   ```
 - 값을 반환할 변수가 여러 개라면?
   - 함수가 값 하나만 반환하는 방식을 선호하기 때문에 각각을 반환하는 함수 여러 개로 만든다. 
+
+2. 함수 인라인하기
+- 배경
+  - 때때로 함수 본문이 이름만큼 명확한 경우가 있다. 
+  - 이럴 경우 함수를 제거한다. 간접 호출은 유용할 수도 있지만 쓸데없는 간접 호출은 거슬린다. 
+  - 리팩터링 과정에서 잘못 추출된 함수들도 다시 인라인한다. 
+- 절차
+  - 다형 메스드인지 확인한다. 
+    - 서브클래스에서 오버라이드하는 메서드는 인라인하면 안된다. 
+  - 인라인할 함수를 호출하는 곳을 모두 찾는다. 
+  - 각 호출문을 함수 본문으로 교체한다. 
+  - 함수 정의를 삭제한다. 
+- 예시
+  ```javascript
+  function rating(aDriver) {
+      return moreThanFiveLateDeilveries(aDriver) ? 2 : 1;
+  }
+
+  function moreThanFiveLateDeilveries(aDriver) {
+      return aDriver.numberOfLateDeliveries > 5;
+  }
+  ```
