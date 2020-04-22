@@ -331,5 +331,42 @@
   - 대입 대상이 되는 임시 변수는 크게 두 가지다
     - 먼저 변수가 추출된 코드 안에서만 사용될 때다. 
     - 다음은 변수가 추출한 함수 밖에서 사용될 때다. 이경우 변수에 대입된 새 값을 반환해야 한다. 
+  ```javascript
+  function printOwing(invoice) {
+      printBanner();
+
+      const outstanding = calculateOutstading(invoice);
+
+      recordDueDate(invoice);
+
+      printDetails(invoice, outstanding)
+  }
+
+  function calculateOutstading(invoice) {
+      let result = 0;  
+      for(const o of invoice.orders) {
+          result += o.a
+          mount;
+      }
+      return result;  // 값이 변경되 반환.
+  }
+
+  function printBanner() {
+      console.log("****************");
+      console.log("*** 고객 채무 ***")
+      console.log("****************");
+  }
+
+  function printDetails(invoice, outstanding) {
+      console.log('고객명: ${invoice.customer}');
+      console.log('채무액: ${outstanding}');
+      console.log('마감일: ${invoice.duDate.toLocaleDateString()}');
+  }
+
+  function recordDueDate(invoice) {
+      const today = Clock.today;
+      invoice.dueDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 30);
+  }
+  ```
 - 값을 반환할 변수가 여러 개라면?
   - 함수가 값 하나만 반환하는 방식을 선호하기 때문에 각각을 반환하는 함수 여러 개로 만든다. 
