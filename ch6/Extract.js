@@ -7,21 +7,25 @@ function printOwing(invoice) {
         outstanding += o.amount;
     }
 
-    const today = Clock.today;
-    invoice.dueDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 30);
+    recordDueDate(invoice);
 
-    printDetails();
-
-    function printDetails() {
-        console.log('고객명: ${invoice.customer}');
-        console.log('채무액: ${outstanding}');
-        console.log('마감일: ${invoice.duDate.toLocaleDateString()}');
-    }
+    printDetails(invoice, outstanding)
 }
 
 function printBanner() {
     console.log("****************");
     console.log("*** 고객 채무 ***")
     console.log("****************");
+}
+
+function printDetails(invoice, outstanding) {
+    console.log('고객명: ${invoice.customer}');
+    console.log('채무액: ${outstanding}');
+    console.log('마감일: ${invoice.duDate.toLocaleDateString()}');
+}
+
+function recordDueDate(invoice) {
+    const today = Clock.today;
+    invoice.dueDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 30);
 }
 

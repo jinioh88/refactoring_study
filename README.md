@@ -213,7 +213,7 @@
   - 테스트한다.
   - 다른 코드에 방금 추출한 것과 똑같거나 비슷한 코드가 없는지 살핀다. 있담면 방금 추출한 새 함수를 호출하도록 바꿀지 검토한다. 
 - 예시: 유효범위를 벗어나는 변수가 없을 때
-  ```
+  ```javascript
   function printOwing(invoice) {
     let outstanding = 0;
 
@@ -234,7 +234,7 @@
   }
   ```
   - 코드를 잘라 새 함수에 붙이고, 원래 자리에 새함수 호출문을 넣어보자.
-  ```
+  ```javascript
   function printOwing(invoice) {
     let outstanding = 0;
 
@@ -265,6 +265,65 @@
 - 예시: 지역 변수를 사용할 때
   - 지역 변수와 관련해 가장 간단한 경우는 변수를 사용하지만 다른 값을 다시 대입하지 않을 때다.
   - 이 경우 지역 변수들을 그냥 매개변수로 넘기면 된다. 
+  ```javascript
+  function printOwing(invoice) {
+    let outstanding = 0;
+
+    printBanner();
+
+    for(const o of invoice.orders) {
+        outstanding += o.amount;
+    }
+
+    const today = Clock.today;
+    invoice.dueDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 30);
+
+    printDetails(invoice, outstanding)
+  }
+
+  function printBanner() {
+      console.log("****************");
+      console.log("*** 고객 채무 ***")
+      console.log("****************");
+  }
+
+  function printDetails(invoice, outstanding) {
+      console.log('고객명: ${invoice.customer}');
+      console.log('채무액: ${outstanding}');
+      console.log('마감일: ${invoice.duDate.toLocaleDateString()}');
+  }
   ```
-  
+  - 지역변수가 데이터구조(배열, 레코드, 객체)라면 똑같이 매개변수로 넘긴 후 필드 값을 수정할 수 있다. 
+  ```javascript
+  function printOwing(invoice) {
+    let outstanding = 0;
+
+    printBanner();
+
+    for(const o of invoice.orders) {
+        outstanding += o.amount;
+    }
+
+    recordDueDate(invoice);
+
+    printDetails(invoice, outstanding)
+  }
+
+  function printBanner() {
+      console.log("****************");
+      console.log("*** 고객 채무 ***")
+      console.log("****************");
+  }
+
+  function printDetails(invoice, outstanding) {
+      console.log('고객명: ${invoice.customer}');
+      console.log('채무액: ${outstanding}');
+      console.log('마감일: ${invoice.duDate.toLocaleDateString()}');
+  }
+
+  function recordDueDate(invoice) {
+      const today = Clock.today;
+      invoice.dueDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 30);
+  }
   ```
+- 
