@@ -1,15 +1,20 @@
 function printOwing(invoice) {
-    let outstanding = 0;
-
     printBanner();
 
-    for(const o of invoice.orders) {
-        outstanding += o.amount;
-    }
+    const outstanding = calculateOutstading(invoice);
 
     recordDueDate(invoice);
 
     printDetails(invoice, outstanding)
+}
+
+function calculateOutstading(invoice) {
+    let result = 0;  
+    for(const o of invoice.orders) {
+        result += o.a
+        mount;
+    }
+    return result;  // 값이 변경되 반환.
 }
 
 function printBanner() {
