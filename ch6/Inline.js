@@ -1,7 +1,11 @@
 function rating(aDriver) {
-    return moreThanFiveLateDeilveries(aDriver) ? 2 : 1;
-}
-
-function moreThanFiveLateDeilveries(aDriver) {
     return aDriver.numberOfLateDeliveries > 5;
 }
+
+function reportLines(aCustomer) {
+    const lines = [];
+    lines.push(["name", aCustomer.name]);
+    lines.push(["location", aCustomer.location]);
+    return lines;
+}
+

@@ -392,3 +392,25 @@
       return aDriver.numberOfLateDeliveries > 5;
   }
   ```
+  - 좀더 복잡한 경우
+  ```javascript
+  function reportLines(aCustomer) {
+      const lines = [];
+      gatherCustomerData(lines, aCustomer);
+      return lines;
+  }
+
+  function gatherCustomerData(out, aCustomer) {
+      out.push(["name", aCustomer.name]);
+      out.push(["location", aCustomer.location]);
+  }
+  ```
+  - 단 계를 잘게 나눠 하나씩 처리하자 
+  ```javascript
+  function reportLines(aCustomer) {
+      const lines = [];
+      lines.push(["name", aCustomer.name]);
+      lines.push(["location", aCustomer.location]);
+      return lines;
+  }  
+  ```
