@@ -562,3 +562,11 @@
   - circumference 함수를 만들고 잠시 리팩터링 작업을 멈춘다.
   - 가능하면 circum 함수는 폐기될 예정을 알린다. 
   - 클라이언트 모두가 circum 에서 circumference로 갈아탓다면 circum 함수를 삭제한다. 
+- 예시: 매개변수 속성으로 바꾸기
+  ```javascript
+  function inNewEngland(aCustomer) {
+      return ["MA", "CT", "ME", "VT", "NH", "RI"].includes(aCustomer.address.state);
+  }
+  ```
+  - 위 함수의 매개변수로 고객 대신 주 식별코드로 받도록 리팩토링하면 고객에 대한 의존성이 제거되어 더 넓은 문맥에 활용 될 수 있다. 
+ 
