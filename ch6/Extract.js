@@ -11,6 +11,12 @@ function printOwing(invoice) {
     invoice.dueDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 30);
 
     printDetails();
+
+    function printDetails() {
+        console.log('고객명: ${invoice.customer}');
+        console.log('채무액: ${outstanding}');
+        console.log('마감일: ${invoice.duDate.toLocaleDateString()}');
+    }
 }
 
 function printBanner() {
@@ -19,8 +25,3 @@ function printBanner() {
     console.log("****************");
 }
 
-function printDetails() {
-console.log('고객명: ${invoice.customer}');
-    console.log('채무액: ${outstanding}');
-    console.log('마감일: ${invoice.duDate.toLocaleDateString()}');
-}
