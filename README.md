@@ -437,3 +437,61 @@
           Math.min(order.quantity * order.itemPrice * 0.1, 100);
   }
   ```
+  - 변수 이름을 지어주고 교체하자
+  ```javascript
+  function price(order) {
+      const basePrice = order.quantity * order.itemPrice;
+      const quantityDiscount = Math.max(0, order.quantity - 500) * order.itemPrice * 0.05;
+      const shipping = Math.min(order.quantity * order.itemPrice * 0.1, 100);
+      
+      return basePrice - quantityDiscount + shipping;
+  }  
+  ```
+- 예시: 클래스 안에서
+  ```javascript
+  class Order {
+      constructor(aRecord) {
+          this.data = aRecord;
+      }    
+
+      get quantity() {
+          return this.data.quantity;
+      }
+
+      get itemPrice() {
+          return this.data.itemPrice;
+      }
+
+      get price() {
+          return this.quantity * this.itemPrice - 
+              Math.max(0, order.quantity - 500) * order.itemPrice * 0.05 + 
+              Math.min(order.quantity * order.itemPrice * 0.1, 100);
+      
+      }
+  }
+  ```
+  - 추출하려는 변수 이름이 price() 메서드 범위를 넘어 주문을 표현하는 Order 클래스 전체에 적용된다. 
+  - 클래스 전체에 영향을 줄 때는 변수가 아닌 메서드로 추출한다. 
+  ```javascript
+  class Order {
+      constructor(aRecord) {
+          this.data = aRecord;
+      }    
+
+      get quantity() {
+          return this.data.quantity;
+      }
+
+      get itemPrice() {
+          return this.data.itemPrice;
+      }
+
+      get price() {
+          return this.basePrice - this.quantityDiscount + this.shipping;
+      }
+
+      get basePrice() {this.quantity * this.itemPrice;}
+      get quantityDiscount() {Math.max(0, order.quantity - 500) * order.itemPrice * 0.05;}
+      get shipping() {Math.min(order.quantity * order.itemPrice * 0.1, 100);}
+  }
+  ```
