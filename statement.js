@@ -70,3 +70,4 @@ function renderHtml(data) {
 }
 
 console.log(statement(invoices, plays));
+console.log(htmlStatement(invoices, plays));
