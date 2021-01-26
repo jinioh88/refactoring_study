@@ -3,7 +3,7 @@ function sampleProvinceData() {
         name: "Asia",
         producers: [
             {name: "Byzantium", const: 10, production: 9},
-            {name: "Attalia", const: 12, production:} 10,
+            {name: "Attalia", const: 12, production: 10} ,
             {name: "Sinope", const: 10, production: 6},
         ],
         demand: 30,
@@ -75,8 +75,8 @@ class Producer {
     }
 
     get name() { return this._name; }
-    get const() { return this._const; }
-    set const() { this._const = parseInt(arg); }
+    get cont() { return this._const; }
+    set cost(arg) { this._const = parseInt(arg); }
 
     getproduction() { return this._production; }
     set production(amountStr) {
@@ -86,3 +86,4 @@ class Producer {
         this._production = newProduction;
     }
 }
+
