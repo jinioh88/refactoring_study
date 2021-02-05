@@ -3,7 +3,7 @@ reading = {customer: 'ivan', quantity: 10, month: 5, year: 2017};
 const aReading = acquireReading();
 const aReading = new reading(aReading);
 const basicChargeAmount = aReading.baseCharge;
-
+const taxableCharge = aReading.taxableCharge;
 
 class Reanding {
     constructor(data) {
@@ -18,5 +18,8 @@ class Reanding {
     get year() {return this._year;}
     get baseCharge() {
         return baseRate(this.month, this.year) * this.quantity;
+    }
+    get taxableChargeFn() {
+        return Math.max(0, this.baseCharge - taxThreshold(this.year));
     }
 }
